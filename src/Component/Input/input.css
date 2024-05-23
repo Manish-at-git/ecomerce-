@@ -1,0 +1,14 @@
+[data-slot="input-wrapper"] {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+[data-slot="input-wrapper"]:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+[data-slot="input"]:focus {
+    background-color: transparent;
+    box-shadow: none;
+}
