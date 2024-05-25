@@ -1,5 +1,5 @@
 "use client";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Images } from "@/constants";
 import Image from "next/image";
 import { Button } from "@nextui-org/react";
@@ -23,13 +23,18 @@ const index = () => {
 
   const router = useRouter();
 
+
   useEffect(() => {
-    if (data?.login) {
+    if (localStorage.getItem("token")) {
       router.push("/");
     }
-  }, [data]);
+  }, []);
+
   return (
-    <div className="flex h-screen w-full">
+    <div
+      className="flex w-full"
+      style={{ height: "calc(100vh - 115px)", overflow: "hidden" }}
+    >
       <div className="w-1/2 ">
         <Image
           src={Images.SignUpSizeImg}
@@ -43,28 +48,37 @@ const index = () => {
           initialValues={{ email: "", password: "" }}
           // validationSchema={validationSchema}
           onSubmit={(values) => {
-            authLogin(values);
-            // .unwrap()
-            // .then((data) => {
-            //   if (data?.statusCode == 400) {
-            //     if (data?.statusMessage.includes("Email")) {
-            //       setFieldError("email", data?.statusMessage);
-            //     } else {
-            //       setFieldError("password", data?.statusMessage);
-            //     }
-            //   } else if (data?.statusCode == 200) {
-            //     router.push("/");
-            //   }
-            // })
-            // .catch((error) => {
-            //   Swal.fire({
-            //     icon: "error",
-            //     title: "Oops...",
-            //     text: "Something went wrong!",
-            //     footer: '<a href="#">Server ERROR</a>',
-            //   });
-            //   console.log(error);
-            // });
+            authLogin(values)
+              .unwrap()
+              .then((data) => {
+                if (data?.status == 200) {
+                  debugger;
+                  // Store the token in local storage
+                  localStorage.setItem("token", data.accessToken);
+                  localStorage.setItem(
+                    "userDetails",
+                    JSON.stringify(data?.userDetails)
+                  );
+
+                  // Redirect to the home page
+                  router.push("/");
+                } else if (data?.status == 400) {
+                  if (data?.message.includes("Email")) {
+                    setFieldError("email", data?.message);
+                  } else {
+                    setFieldError("password", data?.message);
+                  }
+                }
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Something went wrong!",
+                  footer: '<a href="#">Server ERROR</a>',
+                });
+                console.log(error);
+              });
           }}
         >
           {({ errors, touched }) => (

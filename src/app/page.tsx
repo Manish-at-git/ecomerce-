@@ -29,8 +29,7 @@ export default function Home() {
 
   useEffect(()=>{},[])
   return (
-    <main className="">
-      <Login />
+    <main className=""> 
       {/* <About /> */}
       {/* <div className="text-red-500">hello</div> */}
 
