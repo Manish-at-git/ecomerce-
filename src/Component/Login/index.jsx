@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useAuthLoginMutation } from "@/Slices/Login";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setFilterTabs } from "@/Slices/LoginStatus";
 
 const index = () => {
   const [email, setEmail] = useState("");
@@ -22,10 +24,13 @@ const index = () => {
   });
 
   const router = useRouter();
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("setFilterTabssetFilterTabssetFilterTabssetFilterTabs");
+    debugger;
     if (localStorage.getItem("token")) {
+      dispatch(setFilterTabs("LoggedIn"));
       router.push("/");
     }
   }, []);
@@ -40,6 +45,7 @@ const index = () => {
           src={Images.SignUpSizeImg}
           width={"100%"}
           height={"100%"}
+          alt=""
           style={{ height: "100vh" }}
         />
       </div>

@@ -3,8 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // Ensure this path is correct
 
 const initialState: any = {
-  authLogin: false,
-  loginStatus: null,
+  loginStatus: "login",
 };
 
 export const filterTab = createSlice({
@@ -12,11 +11,12 @@ export const filterTab = createSlice({
   initialState,
   reducers: {
     setFilterTabs: (state, action) => {
+      console.log(action,'setFilterTabssetFilterTabs')
       state.loginStatus = action.payload;
     },
   },
 });
 
 export const { setFilterTabs } = filterTab.actions;
-export const selectLoginStatus = (state: RootState) => state.filterTab.loginStatus;
+export const authLoginState = (state: RootState) => state.filterTab.loginState;
 export default filterTab.reducer;

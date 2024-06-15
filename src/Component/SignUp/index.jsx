@@ -7,7 +7,12 @@ const index = () => {
   return (
     <div className="flex w-full">
       <div className="w-1/2">
-        <Image src={Images.SignUpSizeImg} width={"100%"} height={"100%"} />
+        <Image
+          src={Images.SignUpSizeImg}
+          width={"100%"}
+          height={"100%"}
+          alt=""
+        />
       </div>
       <div className="flex justify-center items-center w-1/2">
         <LoginForm />
@@ -17,12 +22,6 @@ const index = () => {
 };
 
 export default index;
-
-
-
-
-
-
 
 // InputField.jsx
 const InputField = ({ type, placeholder }) => (
@@ -43,7 +42,7 @@ const CreateAccountButton = () => (
 // GoogleSignUpButton.jsx
 const GoogleSignUpButton = () => (
   <Button className="px-16 py-4 mt-10 border rounded-sm w-full bg-white/60 text-[#000000]">
-    <Image src={Images.Google} width={25} height={25} />
+    <Image src={Images.Google} width={25} height={25} alt="" />
     Sign up with Google
   </Button>
 );

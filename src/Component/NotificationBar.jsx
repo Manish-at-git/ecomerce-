@@ -40,7 +40,7 @@ const DropDown = () => {
             <>
               <span className="text-[16px] text-white">English</span>
               <div>
-                <Image src={Images.dropdown} height={10} />
+                <Image src={Images.dropdown} height={10}alt="" />
               </div>
             </>
           </Button>
