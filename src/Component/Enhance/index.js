@@ -5,8 +5,8 @@ import MButton from "../Buttons/MButton";
 
 const Enhance = ({}) => {
   const timer = [
+    { time: "05", type: "Days" },
     { time: "23", type: "Hours" },
-    { time: "05", type: "Hours" },
     { time: "59", type: "Minutes" },
     { time: "35", type: "Seconds" },
   ];
@@ -18,9 +18,14 @@ const Enhance = ({}) => {
           Enhance Your <br /> Music Experience
         </div>
         <div className="flex gap-8">
-          {timer.map((item,index) => (
-            <div className="bg-white rounded-full w-[70px] h-[70px] flex flex-col justify-center items-center" key={index}>
-              <div className="text-[18px] font-semibold leading-[18px]">{item?.time}</div>
+          {timer.map((item, index) => (
+            <div
+              className="bg-white text-black rounded-full w-[70px] h-[70px] flex flex-col justify-center items-center"
+              key={index}
+            >
+              <div className="text-[18px] font-semibold leading-[18px]">
+                {item?.time}
+              </div>
               <div className="text-[13px]">{item?.type}</div>
             </div>
           ))}

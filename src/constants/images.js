@@ -27,8 +27,30 @@ import dropdown from "../assets/icons/dropdown.svg";
 import ellipse from "../assets/images/ellipse.svg";
 import SignUpSizeImg from "../assets/images/SignUpSizeImg.png";
 import banner1 from "../assets/images/banner1.png";
+import LinkedIn from "../assets/images/LinkedIn.svg";
+import Twitter from "../assets/images/LinkedIn.svg";
+import Insta from "../assets/images/Insta.svg";
+import FaceBook from "../assets/images/FaceBook.svg";
+import appstore from "../assets/images/appstore.png";
+import playstore from "../assets/images/playstore.jpg";
+import Qrcode from "../assets/images/Qrcode.png";
+import playStation from "../assets/images/payStation.svg";
+import womenCollection from "../assets/images/womenCollection.svg";
+import speakers from "../assets/images/speakers.svg";
+import perfumes from "../assets/images/perfumes.svg";
 
 const Images = {
+  perfumes,
+  speakers,
+  womenCollection,
+  playStation,
+  LinkedIn,
+  Twitter,
+  Insta,
+  FaceBook,
+  appstore,
+  playstore,
+  Qrcode,
   banner1,
   SignUpSizeImg,
   productImage,

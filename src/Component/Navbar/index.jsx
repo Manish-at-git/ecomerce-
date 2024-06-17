@@ -28,6 +28,10 @@ export default function NavbarComponent() {
       text: "About",
       link: "/about",
     },
+    {
+      text: "Sign Up",
+      link: "/about",
+    },
   ];
 
   const loginStatus = useSelector((state) => state?.authLoginState);

@@ -4,10 +4,11 @@ import Image from "next/image";
 import Login from "@/Component/Login/index";
 import About from "../Component/About/About";
 import MBrowseByCategory from "@/Component/BrowseByCategory";
+import Footer from "@/Component/Footer/index";
 
 import MButton from "@/Component/Buttons/MButton";
 import Enhance from "@/Component/Enhance";
-import MInput from "@/Component/Input/MInput";
+
 import Service from "@/Component/Service";
 import Section from "@/Component/Section";
 import SectionSlider from "@/Component/SectionSlider";
@@ -35,7 +36,7 @@ export default function Home() {
       <Provider store={store}>
         {/* <About /> */}
         {/* <div className="text-red-500">hello</div> */}
-        <ProductForm />
+        {/* <ProductForm /> */}
         <div className="px-24 w-full">
           <div className="flex gap-10 px-10 mb-16">
             <Sidenav />
@@ -56,7 +57,6 @@ export default function Home() {
             buttonText="View More"
             data={todays}
           />
-
           <hr className="border" />
           <div className="!px-10 !py-6 my-10 w-full ">
             <MBrowseByCategory
@@ -91,6 +91,7 @@ export default function Home() {
           <hr className="my-3" />
           <Service />
         </div>
+        <Footer />
       </Provider>
     </main>
   );

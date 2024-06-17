@@ -21,12 +21,15 @@ const Service = () => {
     },
   ];
   return (
-    <div className="flex gap-20 my-5 mx-auto">
+    <div className="flex gap-20 my-5 mx-auto items-center justify-center">
       {list.map((item, index) => {
         return (
-          <div className="px-5 py-2 flex flex-col items-center justify-center gap-5" key={index}>
+          <div
+            className="px-5 py-2 flex flex-col items-center justify-center gap-5"
+            key={index}
+          >
             <Image src={item.image.src} alt="" width={80} height={80} />
-            <div className="flex flex-col gap-2 justify-center items-center ">
+            <div className="flex flex-col gap-2 justify-center items-center text-black ">
               <p className="text-[20px] font-semibold">{item.header}</p>
               <p className="text-[14px]">{item.text}</p>
             </div>
