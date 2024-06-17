@@ -30,7 +30,7 @@ export default function NavbarComponent() {
     },
     {
       text: "Sign Up",
-      link: "/about",
+      link: "/signup",
     },
   ];
 
@@ -70,9 +70,7 @@ export default function NavbarComponent() {
           );
         })}
       </NavbarContent>
-      <NavbarContent justify="end">
-        <MInput placeholder="input" change={() => {}} />
-      </NavbarContent>
+
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
           <Link href="/login">Login</Link>
