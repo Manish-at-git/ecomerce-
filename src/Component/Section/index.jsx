@@ -3,6 +3,7 @@ import CategoryHeader from "../CategoryHeader";
 import MCard from "../Card/MCard";
 
 const Section = ({ title, subTitle, buttonText, data }) => {
+  console.log(data, "dddddda")
   return (
     <div className="w-full px-10">
       <CategoryHeader
@@ -11,8 +12,8 @@ const Section = ({ title, subTitle, buttonText, data }) => {
         showButton={true}
         buttonText={buttonText}
       />
-      <div className="flex justify-between">
-        {data.map((item, index) => {
+      <div className="flex justify-start gap-8">
+        {data?.map((item, index) => {
           return <MCard className="" data={item} key={index} />;
         })}
       </div>

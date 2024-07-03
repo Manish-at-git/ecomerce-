@@ -34,7 +34,7 @@ export default function NavbarComponent() {
   console.log(loginStatus, "loginStatus");
 
   return (
-    <Navbar className="border w-full">
+    <Navbar className="border !w-full">
       <NavbarBrand>
         <p className="text-[24px] font-semibold text-inherit">Exclusive</p>
       </NavbarBrand>

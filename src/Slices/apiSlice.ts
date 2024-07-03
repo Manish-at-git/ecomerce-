@@ -4,17 +4,14 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_URL,
-    prepareHeaders(headers) {
-      let token = null;
-      if (typeof window !== 'undefined') {
-        // token = getCookie("authToken");
-    }
-      headers.set("authorization", `Bearer ${token && token}`);
+    prepareHeaders: (headers, { getState }:any) => {
+      const token = getState().filterTab.token || localStorage.getItem("token");
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
       return headers;
     },
   }),
-  tagTypes: [
-    "login",
-  ],
+  tagTypes: ["login"],
   endpoints: (builder) => ({}),
 });

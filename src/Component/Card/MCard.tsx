@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import Image from "next/image";
 import Images from "@/constants/images";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type MCardProps = {
   className?: string;
@@ -11,6 +13,7 @@ type MCardProps = {
 };
 
 const MCard: React.FC<MCardProps> = ({ className, data }) => {
+  console.log(data, "datttttttt")
   const [showButton, setshowButton] = useState(false);
   return (
     <Card
@@ -22,7 +25,7 @@ const MCard: React.FC<MCardProps> = ({ className, data }) => {
         <div className="absolute left-5 top-5 bg-[#DB4444] px-3 py-1 text-white rounded">
           {data?.discount}%
         </div>
-        <div className="absolute right-5 top-5 flex flex-col gap-2">
+        <div className="absolute right-5 top-5 flex flex-col gap-2 ">
           <div className="bg-white p-[6px] rounded-full">
             <Image
               alt="Card background"
@@ -44,8 +47,8 @@ const MCard: React.FC<MCardProps> = ({ className, data }) => {
         </div>
         <Image
           alt="Card background"
-          className="object-cover"
-          src={data?.image?.src}
+          className="object-contain w-[220px] h-[200px]"
+          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}${data?.mediaSchema?.[0]?.url}`}
           width={200}
           height={220}
         />
@@ -58,7 +61,16 @@ const MCard: React.FC<MCardProps> = ({ className, data }) => {
         </div>
       </CardHeader>
       <CardBody className="overflow-visible py-4 px-0 flex flex-col gap-2">
-        <h4 className="text-[18px]">{data?.title}</h4>
+        <Link
+          href={{
+            pathname: "/buyer/productPreview/",
+            query: { productId: data?.productId },
+          }}
+        >
+          <h4 className="text-[18px] hover:underline cursor-pointer">
+            {data?.productName}
+          </h4>
+        </Link>
         <div className="flex gap-4">
           <p className="text-[#DB4444] font-medium">${data?.offerPrice}</p>
           <s className="text-black/50 font-medium">
@@ -77,7 +89,7 @@ const MCard: React.FC<MCardProps> = ({ className, data }) => {
               />
             );
           })}
-          <p className="text-black/50 font-medium mt-1 ml-3">{`(${data?.ratingCount})`}</p>
+          <p className="text-black/50 font-medium mt-1 ml-3">{`(${data?.ratingCount || 150})`}</p>
         </div>
       </CardBody>
     </Card>

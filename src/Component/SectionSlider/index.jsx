@@ -53,10 +53,10 @@ const SectionSlider = ({ title, subTitle, buttonText, data }) => {
           className="mySwiper"
         >
           <>
-            {data.map((item, i) => {
+            {data?.map((item, i) => {
               return (
                 <SwiperSlide key={i}>
-                  <MCard className="" data={item} />
+                  <MCard className="" data={item} key={i} />
                 </SwiperSlide>
               );
             })}

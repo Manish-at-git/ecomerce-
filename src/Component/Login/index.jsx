@@ -5,16 +5,20 @@ import Image from "next/image";
 import { Button } from "@nextui-org/react";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useAuthLoginMutation } from "@/Slices/Login";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setFilterTabs } from "@/Slices/LoginStatus";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilterTabs, setToken, setUserDetails } from "@/Slices/LoginStatus";
+import { useLoginMutation } from "@/Slices/auth/login";
 
 const index = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState(false);
-  const [authLogin, { data }] = useAuthLoginMutation({});
+  const [authLogin, { data }] = useLoginMutation({});
+
+  const token = useSelector((state) => state.filterTab.token);
+
+  console.log(token, "tokendd")
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Please Enter Email"),
@@ -28,12 +32,39 @@ const index = () => {
 
   useEffect(() => {
     console.log("setFilterTabssetFilterTabssetFilterTabssetFilterTabs");
-    debugger;
     if (localStorage.getItem("token")) {
       dispatch(setFilterTabs("LoggedIn"));
-      router.push("/");
+      // router.push("/");
     }
   }, []);
+
+  const handleSubmit = async (values) => {
+    const body = {
+      email: values.email,
+      password: values.password,
+    };
+    await authLogin(body)
+      .unwrap()
+      .then((data) => {
+        if (data?.status == 200) {
+          localStorage.setItem("token", data.accessToken);
+          localStorage.setItem(
+            "userDetails",
+            JSON.stringify(data?.userDetails)
+          );
+          dispatch(setUserDetails(data?.userDetails));
+          dispatch(setToken(data?.accessToken));
+          router.push("/");
+        } else if (data?.status == 400) {
+          if (data?.message.includes("Email")) {
+            setFieldError("email", data?.message);
+          } else {
+            setFieldError("password", data?.message);
+          }
+        }
+      })
+      .catch((e) => console.log("error", e));
+  };
 
   return (
     <div
@@ -50,42 +81,11 @@ const index = () => {
         />
       </div>
       <div className="flex justify-center  items-center w-1/2">
+        <div onClick={() => router.push("/")}>bbbb</div>
         <Formik
           initialValues={{ email: "", password: "" }}
           // validationSchema={validationSchema}
-          onSubmit={(values) => {
-            authLogin(values)
-              .unwrap()
-              .then((data) => {
-                if (data?.status == 200) {
-                  debugger;
-                  // Store the token in local storage
-                  localStorage.setItem("token", data.accessToken);
-                  localStorage.setItem(
-                    "userDetails",
-                    JSON.stringify(data?.userDetails)
-                  );
-
-                  // Redirect to the home page
-                  router.push("/");
-                } else if (data?.status == 400) {
-                  if (data?.message.includes("Email")) {
-                    setFieldError("email", data?.message);
-                  } else {
-                    setFieldError("password", data?.message);
-                  }
-                }
-              })
-              .catch((error) => {
-                Swal.fire({
-                  icon: "error",
-                  title: "Oops...",
-                  text: "Something went wrong!",
-                  footer: '<a href="#">Server ERROR</a>',
-                });
-                console.log(error);
-              });
-          }}
+          onSubmit={handleSubmit}
         >
           {({ errors, touched }) => (
             <Form className="flex flex-col">
@@ -145,28 +145,3 @@ const index = () => {
 };
 
 export default index;
-
-const InputField = ({ type, placeholder, name, onChange, setTouched }) => (
-  <input
-    type={type}
-    placeholder={placeholder}
-    name=""
-    onChange={onChange}
-    onKeyDown={() => setTouched(true)}
-    className="w-full bg-[#ffffff] h-10 p-0 border-b border-black flex items-center mb-4 focus:outline-none"
-  />
-);
-
-// LoginButton.jsx
-const LoginButton = () => (
-  <Button className="px-12 py-6 bg-[#DB4444] rounded-sm text-white">
-    Log in
-  </Button>
-);
-
-// ForgetPasswordLink.jsx
-const ForgetPasswordLink = () => (
-  <a className="flex justify-center items-center rounded-sm bg-white/60 text-[#DB4444]">
-    Forget Password?
-  </a>
-);

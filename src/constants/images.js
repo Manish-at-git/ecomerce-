@@ -8,6 +8,17 @@ import productImage7 from "../assets/images/productImage7.svg";
 import productImage8 from "../assets/images/productImage8.svg";
 import productImage9 from "../assets/images/productImage9.svg";
 
+import productPreview from "../assets/images/productPreview.png";
+import productPreview1 from "../assets/images/productPreview1.png";
+import productPreview2 from "../assets/images/productPreview2.png";
+import productPreview3 from "../assets/images/productPreview3.png";
+import productPreview4 from "../assets/images/productPreview4.png";
+
+import iconDelivery from "../assets/icons/iconDelivery.svg";
+import iconReturn from "../assets/icons/iconReturn.svg";
+import minus from "../assets/icons/minus.svg";
+import add from "../assets/icons/add.svg";
+
 import arrowLeft from "../assets/icons/arrowLeft.png";
 import arrowRight from "../assets/icons/arrowRight.png";
 import heart from "../assets/icons/heart.png";
@@ -57,6 +68,16 @@ const Images = {
   productImage9,
   dropdown,
   ellipse,
+
+  productPreview,
+  productPreview1,
+  productPreview2,
+  productPreview3,
+  productPreview4,
+  iconDelivery,
+  iconReturn,
+  minus,
+  add
 };
 
 export default Images;

@@ -1,7 +1,7 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import clsx from "clsx";
-import { MdClose } from "react-icons/md";
+// import { MdClose } from "react-icons/md";
 
 export interface SelectDropDownI {
   datas: { id: string; name: string; icon?: any }[];
@@ -175,7 +175,7 @@ const SelectDropDown = ({
             className="placeholder:text-inherit rounded-full font-normal text-sm border-none first-letter:outline-none focus:outline-none focus:ring-0 focus:border-none w-11/12"
           />}
 
-        <MdClose
+        {/* <MdClose
           onClick={(e) => {
             if (!openProp) return;
             e.stopPropagation();
@@ -185,7 +185,7 @@ const SelectDropDown = ({
             onChangeValue("")
           }}
           className={clsx("text-primary-o-600 absolute right-0 mr-2", (selected && openProp) ? "block" : "hidden")}
-        />
+        /> */}
 
         <BiChevronDown size={20} className={clsx(open && openProp && "rotate-180", "absolute right-0 mr-2 text-inherit", !openProp && 'text-gray-200', selected && "hidden")} />
       </div>

@@ -11,6 +11,7 @@ type MInputProps = {
   change: () => void;
   value?: string | (readonly string[] & string) | undefined;
   type?:string
+  name?:string
 };
   
 
@@ -20,9 +21,10 @@ const MInput: React.FC<MInputProps> = ({
   change,
   isDisabled=false,
   value,
-  type="text"
+  type="text",
+  name
 }) => {
-  return <Input type={type} placeholder={placeholder} isDisabled={isDisabled} onChange={change} value={value} className={`${className} w-full`} />;
+  return <Input name={name} type={type} placeholder={placeholder} isDisabled={isDisabled} onChange={change} value={value} className={`${className} w-full`} />;
 };
 
 export default MInput;

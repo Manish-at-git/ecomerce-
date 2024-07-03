@@ -8,11 +8,12 @@ type MButtonProps = {
   title: string;
   click: () => void;
   variant?: "solid" | "bordered" | "light" | "flat" | "faded" | "shadow" | "ghost" | undefined;
-  isDisabled?: boolean
+  isDisabled?: boolean,
+  type?: "button" | "submit" | "reset" | undefined
 };
 
-const MButton: React.FC<MButtonProps> = ({ className, title, click, variant=undefined, isDisabled }) => {
-  return <Button color="primary" variant={variant} isDisabled={isDisabled} className={`!px-10 !py-6 font-medium rounded ${className}`}>{title}</Button>;
+const MButton = ({ className, title, click, variant=undefined, isDisabled, type="" }:any) => {
+  return <Button type={type} color="primary" variant={variant} isDisabled={isDisabled} className={`!px-10 !py-6 font-medium rounded ${className}`} onClick={click}>{title}</Button>;
 };
 
 export default MButton;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Close from "../../assets/icons/FCSVG/CommonIcons";
 import { Loader } from "../../assets/icons/FCSVG/CommonIcons";
-import { MdClose } from "react-icons/md";
+// import { MdClose } from "react-icons/md";
 
 const ProductForm = ({ width, header, children, hideModal, isLoading }) => {
   const [open, setOpen] = useState(true);
@@ -33,7 +33,7 @@ const ProductForm = ({ width, header, children, hideModal, isLoading }) => {
           </h3>
           <div className="cursor-pointer" onClick={handleModel}>
             {/* <Close className="text-black stroke-2" /> */}
-            <MdClose />
+            {/* <MdClose /> */}
           </div>
         </div>
 
