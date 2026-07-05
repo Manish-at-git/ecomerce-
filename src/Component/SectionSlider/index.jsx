@@ -36,11 +36,13 @@ const SectionSlider = ({ title, subTitle, buttonText, data }) => {
         onClick={handlePrev}
       >
         <Image width={40} height={40} src={Images.arrowLeft.src} alt="" />
+        <Image width={40} height={40} src={Images.arrowLeft.src} alt="" />
       </div>
       <div
         className="absolute right-3 top-[230px] z-20 border border-[#DB4444] bg-[#DB4444] rounded-full p-3 h-fit w-fit cursor-pointer"
         onClick={handleNext}
       >
+        <Image width={40} height={40} src={Images.arrowRight.src} alt="" />
         <Image width={40} height={40} src={Images.arrowRight.src} alt="" />
       </div>
       <div className="flex justify-between">
@@ -68,3 +70,4 @@ const SectionSlider = ({ title, subTitle, buttonText, data }) => {
 };
 
 export default SectionSlider;
+

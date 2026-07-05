@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Sidenav = () => {
+  const [state, setState] = useState(0)
   const menu = [
     { title: "Woman's Fashion", link: "" },
     { title: "Men's Fashion", link: "" },
@@ -16,13 +17,9 @@ const Sidenav = () => {
   ];
 
   return (
-    <div className="border-r pr-24 pt-5">
-      {menu.map((item, index) => {
-        return (
-          <div className="my-3 cursor-pointer text-[#000000]" key={index}>
-            {item?.title}
-          </div>
-        );
+    <div className="border-r pr-24 pt-5 w-[30%]">
+      {menu.map((item, i) => {
+        return <div className={`my-3 cursor-pointer ${state === i ? "text-[#DB4444]" : ""}`} onClick={() => setState(i)}>{item?.title}</div>;
       })}
     </div>
   );

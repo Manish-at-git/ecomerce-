@@ -8,6 +8,21 @@ import productImage7 from "../assets/images/productImage7.svg";
 import productImage8 from "../assets/images/productImage8.svg";
 import productImage9 from "../assets/images/productImage9.svg";
 
+import productPreview from "../assets/images/productPreview.png";
+import productPreview1 from "../assets/images/productPreview1.png";
+import productPreview2 from "../assets/images/productPreview2.png";
+import productPreview3 from "../assets/images/productPreview3.png";
+import productPreview4 from "../assets/images/productPreview4.png";
+
+import iconDelivery from "../assets/icons/iconDelivery.svg";
+import iconReturn from "../assets/icons/iconReturn.svg";
+import minus from "../assets/icons/minus.svg";
+import add from "../assets/icons/add.svg";
+
+import bin from "../assets/icons/bin.svg";
+import eye from "../assets/icons/eye.svg";
+import pen from "../assets/icons/pen.svg";
+
 import arrowLeft from "../assets/icons/arrowLeft.png";
 import arrowRight from "../assets/icons/arrowRight.png";
 import heart from "../assets/icons/heart.png";
@@ -27,8 +42,30 @@ import dropdown from "../assets/icons/dropdown.svg";
 import ellipse from "../assets/images/ellipse.svg";
 import SignUpSizeImg from "../assets/images/SignUpSizeImg.png";
 import banner1 from "../assets/images/banner1.png";
+import LinkedIn from "../assets/images/LinkedIn.svg";
+import Twitter from "../assets/images/LinkedIn.svg";
+import Insta from "../assets/images/Insta.svg";
+import FaceBook from "../assets/images/FaceBook.svg";
+import appstore from "../assets/images/appstore.png";
+import playstore from "../assets/images/playstore.jpg";
+import Qrcode from "../assets/images/Qrcode.png";
+import playStation from "../assets/images/payStation.svg";
+import womenCollection from "../assets/images/womenCollection.svg";
+import speakers from "../assets/images/speakers.svg";
+import perfumes from "../assets/images/perfumes.svg";
 
 const Images = {
+  perfumes,
+  speakers,
+  womenCollection,
+  playStation,
+  LinkedIn,
+  Twitter,
+  Insta,
+  FaceBook,
+  appstore,
+  playstore,
+  Qrcode,
   banner1,
   SignUpSizeImg,
   productImage,
@@ -57,6 +94,19 @@ const Images = {
   productImage9,
   dropdown,
   ellipse,
+
+  productPreview,
+  productPreview1,
+  productPreview2,
+  productPreview3,
+  productPreview4,
+  iconDelivery,
+  iconReturn,
+  minus,
+  add,
+  bin,
+  eye,
+  pen
 };
 
 export default Images;

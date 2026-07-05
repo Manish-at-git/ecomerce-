@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -6,6 +6,10 @@ import {
   NavbarItem,
   Link,
   Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import MInput from "../Input/MInput";
@@ -13,7 +17,7 @@ import ProfileSvg from "@/assets/icons/FCSVG/ProfileSvg";
 import { useSelector } from "react-redux";
 import authLoginState from "@/Slices/LoginStatus/index";
 
-export default function NavbarComponent() {
+export default function NavbarComponent({ isAuthenticated, userType }) {
   const router = usePathname();
   const menu = [
     {
@@ -28,13 +32,20 @@ export default function NavbarComponent() {
       text: "About",
       link: "/about",
     },
+    {
+      text: "Sign Up",
+      link: "/signup",
+    },
   ];
 
   const loginStatus = useSelector((state) => state?.authLoginState);
   console.log(loginStatus, "loginStatus");
 
+  const loginStatus = useSelector((state) => state?.authLoginState);
+  console.log(loginStatus, "loginStatus");
+
   return (
-    <Navbar className="border w-full">
+    <Navbar className="border !w-full">
       <NavbarBrand>
         <p className="text-[24px] font-semibold text-inherit">Exclusive</p>
       </NavbarBrand>
@@ -69,19 +80,48 @@ export default function NavbarComponent() {
       <NavbarContent justify="end">
         <MInput placeholder="input" change={() => {}} />
       </NavbarContent>
+      {isAuthenticated ? <></> : <></>}
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/signup" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-        <Link href="/profile">
-          <ProfileSvg />{" "}
-        </Link>
+        {!isAuthenticated ? (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              <Link href="/login">Login</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button as={Link} color="primary" href="/signup" variant="flat">
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <></>
+        )}
+        <Profile />
       </NavbarContent>
     </Navbar>
   );
 }
+
+const Profile = () => {
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userDetails");
+    dispatch(setUserDetails({}));
+    dispatch(setToken(""));
+  };
+  return (
+    <div className="flex items-center gap-4">
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <div>
+            <ProfileSvg />
+          </div>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownItem key="logout" onClick={handleLogout}>Logout</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+  );
+};

@@ -27,12 +27,12 @@ const NewArrival = ({ title, subTitle, showButton, buttonText }) => {
       />
       <div className="border grid grid-cols-2 gap-10 h-[650px]">
         <div className="relative bg-black rounded-lg flex justify-center items-end pt-20">
-          {/* <Image
+          <Image
             width={550}
             height={550}
-            src={Images.playStation.src}
+            src={Images.playStation}
             alt="playstation"
-          /> */}
+          />
           {showText(
             "PlayStation 5",
             "Black and White version of the PS5 coming out on sale.",
@@ -42,12 +42,12 @@ const NewArrival = ({ title, subTitle, showButton, buttonText }) => {
         </div>
         <div className="flex flex-col gap-10">
           <div className="relative bg-black rounded-lg flex justify-end flex-1">
-            {/* <Image
+            <Image
               width={450}
               height={460}
-              src={Images.womenCollection.src}
+              src={Images.womenCollection}
               alt="playstation"
-            /> */}
+            />
             {showText(
               "Women's Collections",
               "Featured woman collections that give you another vibe.",
@@ -57,12 +57,12 @@ const NewArrival = ({ title, subTitle, showButton, buttonText }) => {
           </div>
           <div className="flex gap-10 w-full flex-1">
             <div className="relative bg-black rounded-lg w-full flex items-center justify-center">
-              {/* <Image
-                  width={220}
-                  height={220}
-                  src={Images.speakers.src}
-                  alt="playstation"
-                /> */}
+              <Image
+                width={220}
+                height={220}
+                src={Images.speakers}
+                alt="playstation"
+              />
               {showText(
                 "Speakers",
                 "Amazon wireless speakers",
@@ -71,12 +71,12 @@ const NewArrival = ({ title, subTitle, showButton, buttonText }) => {
               )}
             </div>
             <div className="relative bg-black rounded-lg w-full flex items-center justify-center">
-              {/* <Image
+              <Image
                 width={220}
                 height={220}
-                src={Images.perfumes.src}
+                src={Images.perfumes}
                 alt="playstation"
-              /> */}
+              />
               {showText(
                 "Perfume",
                 "GUCCI INTENSE OUD EDP",

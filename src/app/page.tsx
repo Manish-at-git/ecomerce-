@@ -4,10 +4,11 @@ import Image from "next/image";
 import Login from "@/Component/Login/index";
 import About from "../Component/About/About";
 import MBrowseByCategory from "@/Component/BrowseByCategory";
+import Footer from "@/Component/Footer/index";
 
 import MButton from "@/Component/Buttons/MButton";
 import Enhance from "@/Component/Enhance";
-import MInput from "@/Component/Input/MInput";
+
 import Service from "@/Component/Service";
 import Section from "@/Component/Section";
 import SectionSlider from "@/Component/SectionSlider";
@@ -18,6 +19,9 @@ import BannerSlider from "@/Component/BannerSlider";
 import { Images } from "@/constants";
 import ProductForm from "@/Component/ProductForm";
 
+import { useGetListQuery, useGetListProductsQuery } from "../Slices/admin/list";
+import ProductForm from "@/Component/ProductForm";
+
 import {
   browseByCategory,
   ourProducts,
@@ -26,8 +30,35 @@ import {
 } from "@/data/homePage";
 import { useEffect } from "react";
 import { Provider } from "react-redux";
+import { skip } from "node:test";
+import { Provider } from "react-redux";
 
 export default function Home() {
+  console.log("sdfsdfsfsfs");
+
+  const { data, error, isLoading, refetch } = useGetListQuery({});
+  const listIds = data?.data?.map((item:any) => item.id).filter(Boolean);
+  const {
+    data: listProduct,
+    error: listError,
+    isLoading: listIsLoading,
+    refetch: listRefetch,
+  } = useGetListProductsQuery(
+    { id: data?.data?.[0]?.id },
+    { skip: !data?.count }
+  );
+
+   const {
+    data: listProductII,
+    error: listErrorII,
+    isLoading: listIsLoadingII,
+    refetch: listRefetchII,
+  } = useGetListProductsQuery(
+    { id: data?.data?.[1]?.id },
+    { skip: !data?.count }
+  );
+  console.log(data?.data?.[0]?.name, "list");
+
   console.log("sdfsdfsfsfs");
 
   return (

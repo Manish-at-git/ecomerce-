@@ -31,7 +31,7 @@ const NotificationBar = () => {
 export default NotificationBar;
 
 const DropDown = () => {
-    const [state, setState] = useState("English")
+  const [state, setState] = useState("English");
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">
