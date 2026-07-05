@@ -4,10 +4,11 @@ import Image from "next/image";
 import Login from "@/Component/Login/index";
 import About from "../Component/About/About";
 import MBrowseByCategory from "@/Component/BrowseByCategory";
+import Footer from "@/Component/Footer/index";
 
 import MButton from "@/Component/Buttons/MButton";
 import Enhance from "@/Component/Enhance";
-import MInput from "@/Component/Input/MInput";
+
 import Service from "@/Component/Service";
 import Section from "@/Component/Section";
 import SectionSlider from "@/Component/SectionSlider";

@@ -31,7 +31,7 @@ const NotificationBar = () => {
 export default NotificationBar;
 
 const DropDown = () => {
-    const [state, setState] = useState("English")
+  const [state, setState] = useState("English");
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-end">
@@ -40,7 +40,7 @@ const DropDown = () => {
             <>
               <span className="text-[16px] text-white">English</span>
               <div>
-                <Image src={Images.dropdown} height={10}alt="" />
+                <Image src={Images.dropdown} height={10} alt="" />
               </div>
             </>
           </Button>

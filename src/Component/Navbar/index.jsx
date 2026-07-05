@@ -32,6 +32,10 @@ export default function NavbarComponent({ isAuthenticated, userType }) {
       text: "About",
       link: "/about",
     },
+    {
+      text: "Sign Up",
+      link: "/signup",
+    },
   ];
 
   const loginStatus = useSelector((state) => state?.authLoginState);
