@@ -63,6 +63,10 @@ export const columns = [
       key: "totalStock",
       label: "Total Stock",
     },
+    {
+      key : "actions",
+      label: "Actions"
+    }
     
     // {
     //   key: "qtyUnit",

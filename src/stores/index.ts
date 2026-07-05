@@ -8,7 +8,7 @@ import type { MiddlewareAPI, Middleware } from "@reduxjs/toolkit";
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action:any) => {
     if (isRejectedWithValue(action)) {
-      const routeTo = process.env.NEXT_PUBLIC_APP_LOGIN || "http://localhost:3001/login";
+      const routeTo = process.env.NEXT_PUBLIC_APP_LOGIN || "http://localhost:3000/login";
       console.warn(`We got a rejected action! ${action.error.message}`);
       if(action.payload.status === 401){
         // Cookies.remove("authToken");

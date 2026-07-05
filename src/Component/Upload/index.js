@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAddImagesMutation } from "../../Slices/admin/images";
 import { Input } from "@nextui-org/react";
 
-const ImageUpload = ({ imagePaths, setImagePaths }) => {
+const ImageUpload = ({ imagePaths, setImagePaths, data }) => {
   const [previews, setPreviews] = useState([]);
   const [uploadImage] = useAddImagesMutation();
+
+  useEffect(() => {
+    const imgs = data?.map((item) => {
+      return `${process.env.NEXT_PUBLIC_IMAGE_URL}${item?.url}`
+    })
+    setPreviews(imgs || []);
+  }, [data]);
 
   const handleFileChange = async (e) => {
     const formData = new FormData();
@@ -20,14 +27,21 @@ const ImageUpload = ({ imagePaths, setImagePaths }) => {
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} className="flex justify-center items-center'" />
-      {previews.length ? previews.map((item) =>  <img src={item} alt="Preview" width="100" />) : <></>}
+      <input
+        type="file"
+        onChange={handleFileChange}
+        className="flex justify-center items-center'"
+      />
+      {previews.length ? (
+        previews.map((item) => <img src={item} alt="Preview" width="100" />)
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
 
 export default ImageUpload;
-
 
 // import React, { useState, useEffect } from "react";
 
@@ -38,7 +52,7 @@ export default ImageUpload;
 
 //   useEffect(async () => {
 //     if (images.length < 1) return;
-   
+
 //     const formData = new FormData();
 //     formData.append("image", e.target.files[0]);
 
@@ -52,7 +66,7 @@ export default ImageUpload;
 //     } catch (error) {
 //       console.error("Error uploading file:", error);
 //     }
-    
+
 //   }, [images]);
 
 //   function onImageChange(e) {

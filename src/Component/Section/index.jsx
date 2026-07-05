@@ -3,7 +3,6 @@ import CategoryHeader from "../CategoryHeader";
 import MCard from "../Card/MCard";
 
 const Section = ({ title, subTitle, buttonText, data }) => {
-  console.log(data, "dddddda")
   return (
     <div className="w-full px-10">
       <CategoryHeader

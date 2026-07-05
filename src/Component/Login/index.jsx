@@ -81,7 +81,6 @@ const index = () => {
         />
       </div>
       <div className="flex justify-center  items-center w-1/2">
-        <div onClick={() => router.push("/")}>bbbb</div>
         <Formik
           initialValues={{ email: "", password: "" }}
           // validationSchema={validationSchema}

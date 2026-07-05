@@ -1,11 +1,17 @@
 "use client";
 import { store } from "@/stores";
 import "./globals.css";
+import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 
 import { Inter } from "next/font/google";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import NotificationBar from "@/Component/NotificationBar";
 import NavbarComponent from "@/Component/Navbar";
+import { useEffect, useLayoutEffect } from "react";
+import { setToken, setUserDetails } from "@/Slices/LoginStatus";
+import { useRouter } from "next/navigation";
+import LogoutButton from "@/Component/Buttons/LogoutButton";
+import SidenavAdmin from "@/Component/SideNav/AdminSideNav"
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata = {
@@ -14,17 +20,85 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function RootLayout({ children }) {
-  
   return (
     <html lang="en">
       <body className={inter.className}>
         {/* {children} */}
         <Provider store={store}>
-          <NotificationBar />
-          <NavbarComponent />
-          {children}
+          <ShowUserByType children={children} />
         </Provider>
       </body>
     </html>
   );
 }
+
+const ShowUserByType = ({ children }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+  const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+  useEffect(() => {
+    dispatch(setUserDetails(userDetails));
+    dispatch(setToken(token));
+  }, [token, userDetails?.id]);
+
+  const userType = useSelector((state) => state.filterTab.userDetails?.type);
+
+  useLayoutEffect(() => {
+    if (userType) {
+      if (userType == "admin") {
+        router.push("/admin/product");
+      } else {
+        router.push("/buyer/home");
+      }
+    } else {
+      router.push("/login");
+    }
+  }, [userType]);
+
+  return (
+    <>
+      <NavbarComponent
+        isAuthenticated={token ? true : false}
+        userType={userType}
+      />
+      {userType == "admin" ? (
+        <div className="flex gap-3" style={{ minHeight: "calc(100vh - 66px)" }}>
+          {/* <Sidebar>
+            <Menu>
+              <MenuItem>
+                {" "}
+                <div onClick={() => router.push("/admin/product")}>
+                  Product
+                </div>{" "}
+              </MenuItem>
+              <MenuItem>
+                {" "}
+                <div onClick={() => router.push("/admin/category")}>
+                  Category
+                </div>{" "}
+              </MenuItem>
+              <MenuItem>
+                {" "}
+                <div onClick={() => router.push("/admin/list")}>List</div>{" "}
+              </MenuItem>
+              <MenuItem>
+                {" "}
+                <div onClick={() => router.push("#")}>Profile</div>{" "}
+              </MenuItem>
+              <LogoutButton title="Logout" />
+            </Menu>
+          </Sidebar> */}
+          <SidenavAdmin />
+          <div className="flex-1">{children}</div>
+        </div>
+      ) : (
+        <>
+          {token && <NotificationBar />}
+          {children}
+        </>
+      )}
+    </>
+  );
+};

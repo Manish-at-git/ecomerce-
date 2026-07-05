@@ -19,6 +19,10 @@ import iconReturn from "../assets/icons/iconReturn.svg";
 import minus from "../assets/icons/minus.svg";
 import add from "../assets/icons/add.svg";
 
+import bin from "../assets/icons/bin.svg";
+import eye from "../assets/icons/eye.svg";
+import pen from "../assets/icons/pen.svg";
+
 import arrowLeft from "../assets/icons/arrowLeft.png";
 import arrowRight from "../assets/icons/arrowRight.png";
 import heart from "../assets/icons/heart.png";
@@ -77,7 +81,10 @@ const Images = {
   iconDelivery,
   iconReturn,
   minus,
-  add
+  add,
+  bin,
+  eye,
+  pen
 };
 
 export default Images;

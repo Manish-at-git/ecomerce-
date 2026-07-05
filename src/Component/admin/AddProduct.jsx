@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -19,8 +19,16 @@ import { useGetBrandQuery } from "../../Slices/admin/brand";
 import MButton from "../Buttons/MButton";
 import ImageUpload from "../Upload";
 
-export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
+export default function AddProduct({ isOpen, onOpen, onClose, refetch, data }) {
+  console.log(data, "dataaaa");
+
   const [imagePaths, setImagePaths] = useState("");
+
+  useEffect(() => {
+    setImagePaths(data?.mediaSchema)
+  }, [data])
+  
+  console.log(imagePaths, "imagePOaths")
   const {
     data: mainCategories,
     error: mainCategoriesError,
@@ -46,20 +54,29 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
   const [addProduct, { isLoading, isSuccess, isError }] =
     useAddProductMutation();
 
+  const [
+    editProduct,
+    {
+      isLoading: isLoadingEdit,
+      isSuccess: isSuccessEdit,
+      isError: isErrorEdit,
+    },
+  ] = useAddProductMutation();
+
   const initialValues = {
-    isActive: "Y",
-    brandId: "",
-    groupCategoryId: "",
-    mainCategoryId: "",
-    productCode: "",
-    productDescription: "",
-    productName: "",
-    tags: "",
-    productDraftId: 0,
-    offerPrice: 99.99,
-    price: 129.99,
-    discount: 30,
-    totalStock: 100,
+    isActive: data?.isActive ?? "Y",
+    brandId: data?.brandName ?? "",
+    groupCategoryId: data?.groupCategoryId ?? "",
+    mainCategoryId: data?.mainCategoryId ?? "",
+    productCode: data?.productCode ?? "",
+    productDescription: data?.productDescription ?? "",
+    productName: data?.productName ?? "",
+    tags: data?.tags ?? "",
+    productDraftId: data?.productDraftId ?? 0,
+    offerPrice: data?.offerPrice ?? 99.99,
+    price: data?.price ?? 129.99,
+    discount: data?.discount ?? 30,
+    totalStock: data?.totalStock ?? 100,
     mediaSchema: [
       {
         type: "image",
@@ -79,7 +96,7 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
             <Formik
               initialValues={initialValues}
               onSubmit={async (values) => {
-                
+                debugger;
                 const images = imagePaths?.map((image) => {
                   return {
                     type: "image",
@@ -105,12 +122,21 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                   mediaSchema: images,
                 };
                 console.log(body);
-                await addProduct(body)
-                  .unwrap()
-                  .then(() => {
-                    refetch();
-                    onClose();
-                  });
+                if (data) {
+                  await editProduct(body)
+                    .unwrap()
+                    .then(() => {
+                      refetch();
+                      onClose();
+                    });
+                } else {
+                  await addProduct(body)
+                    .unwrap()
+                    .then(() => {
+                      refetch();
+                      onClose();
+                    });
+                }
               }}
             >
               {({ values, handleChange, setFieldValue }) => (
@@ -120,7 +146,7 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                       {/* Main Product Fields */}
                       <div className="flex flex-col gap-2">
                         <label htmlFor="brand">Select Brand</label>
-                        <Field
+                        {/* <Field
                           as={Select}
                           name="brand"
                           value={values.brand}
@@ -131,7 +157,22 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                               {brand.name}
                             </SelectItem>
                           ))}
+                        </Field> */}
+                        <Field
+                          as={Select}
+                          name="brand"
+                          value="177bb9fb-73e7-4e19-a226-eae7f7fd6b34"
+                          onChange={handleChange}
+                        >
+                          {brands?.data?.map((brand) => (
+                            <SelectItem key={brand.id} value={brand.name}>
+                              {brand.name}
+                            </SelectItem>
+                          ))}
                         </Field>
+                        <div className="bg-red-500 w-fit text-white px-2 rounded">
+                          {data?.brandName}
+                        </div>
                       </div>
                       <div className="flex flex-col gap-2">
                         <label htmlFor="mainCategory">
@@ -149,6 +190,9 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                             </SelectItem>
                           ))}
                         </Field>
+                        <div className="bg-red-500 w-fit text-white px-2 rounded">
+                          {data?.mainCategoryName}
+                        </div>
                       </div>
                       <div className="flex flex-col gap-2">
                         <label htmlFor="subCategory">Select Sub Category</label>
@@ -164,6 +208,9 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                             </SelectItem>
                           ))}
                         </Field>
+                        <div className="bg-red-500 w-fit text-white px-2 rounded">
+                          {data?.subCategoryName}
+                        </div>
                       </div>
                       <div className="flex flex-col gap-2">
                         <label htmlFor="productCode">Product Code</label>
@@ -257,7 +304,7 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                           type="number"
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
+                      {/* <div className="flex flex-col gap-2">
                         <label htmlFor="qtyUnit">Quantity Unit</label>
                         <Field
                           as={Input}
@@ -276,10 +323,11 @@ export default function AddProduct({ isOpen, onOpen, onClose, refetch }) {
                           onChange={handleChange}
                           type="text"
                         />
-                      </div>
+                      </div> */}
                       <ImageUpload
                         imagePaths={imagePaths}
                         setImagePaths={setImagePaths}
+                        data={data?.mediaSchema}
                       />
                       {/* <div className="flex flex-col gap-2">
                         <label htmlFor="variantInfo">Variant Info</label>

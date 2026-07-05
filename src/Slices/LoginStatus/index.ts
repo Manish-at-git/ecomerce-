@@ -19,7 +19,6 @@ export const filterTab = createSlice({
       state.userDetails = action.payload;
     },
     setToken: (state, action) => {
-      debugger
       state.token = action.payload
     }
   },

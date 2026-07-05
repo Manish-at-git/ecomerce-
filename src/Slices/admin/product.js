@@ -24,7 +24,16 @@ export const AddProductSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["getProductById"],
     }),
+    updateProduct: builder.mutation({
+      query: (data) => ({
+        url: "/admin/updateProduct",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["updateProduct"],
+    }),
+    
   }),
 });
 
-export const { useAddProductMutation, useGetProductQuery, useGetProductByIdQuery} = AddProductSlice;
+export const { useAddProductMutation, useGetProductQuery, useGetProductByIdQuery, useUpdateProductMutation } = AddProductSlice;
