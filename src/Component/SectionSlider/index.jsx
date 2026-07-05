@@ -35,13 +35,13 @@ const SectionSlider = ({ title, subTitle, buttonText, data }) => {
         className="absolute left-3 top-[230px] z-20 border border-[#DB4444] bg-[#DB4444] rounded-full p-3 h-fit w-fit cursor-pointer"
         onClick={handlePrev}
       >
-        <Image width={40} height={40} src={Images.arrowLeft.src} />
+        <Image width={40} height={40} src={Images.arrowLeft.src} alt="" />
       </div>
       <div
         className="absolute right-3 top-[230px] z-20 border border-[#DB4444] bg-[#DB4444] rounded-full p-3 h-fit w-fit cursor-pointer"
         onClick={handleNext}
       >
-        <Image width={40} height={40} src={Images.arrowRight.src} />
+        <Image width={40} height={40} src={Images.arrowRight.src} alt="" />
       </div>
       <div className="flex justify-between">
         <Swiper
@@ -53,9 +53,9 @@ const SectionSlider = ({ title, subTitle, buttonText, data }) => {
           className="mySwiper"
         >
           <>
-            {data.map((item) => {
+            {data.map((item, i) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={i}>
                   <MCard className="" data={item} />
                 </SwiperSlide>
               );

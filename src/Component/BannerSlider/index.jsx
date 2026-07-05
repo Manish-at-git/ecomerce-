@@ -24,9 +24,9 @@ export default function BannerSlider({ list }) {
         className="mySwiper h-[450px]"
       >
         <>
-          {list.map((item) => {
+          {list.map((item, i) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={i}>
                 <Image
                   src={item.img.src}
                   layout="fill"
@@ -38,6 +38,6 @@ export default function BannerSlider({ list }) {
           })}
         </>
       </Swiper>
-     </div>
+    </div>
   );
 }
